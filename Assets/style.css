@@ -2,3 +2,7 @@ nav span {
     width: 100% !important;
     text-align: center !important;
 }
+
+#body-container {
+    border: black solid 5px;
+}
