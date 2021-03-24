@@ -27,3 +27,14 @@ nav span {
     background-color: purple;
     color: blanchedalmond;
 }
+
+.row {
+    width: auto;
+}
+
+.forecast {
+    background-color: #3698dd;
+    border-radius: 5px;
+    margin: 5px;
+    
+}

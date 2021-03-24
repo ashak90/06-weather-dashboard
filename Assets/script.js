@@ -5,7 +5,7 @@ var inputSwitch;
 const apiKey = "5a2c99614ab6e6f319b1c6d71933e13f";
 var searchHistoryArray = [];
 var todaysDate = moment().format ("MM/D/YYYY")
-
+const numberOfDaysToForcast = 5;
 
 $("#search-btn").on("click", function () {
     event.preventDefault();
@@ -30,7 +30,7 @@ function showWeather(){
 
     $("#header-row").empty();
     $("#current-weather-info").empty();
-    $("#forecast-header").empty();
+    // $("#forecast-header").empty();
     $("#forecast-row").empty();
 
     var currentWeatherQueryUrl = 
@@ -106,6 +106,69 @@ function showWeather(){
                 currentUVBadge.addClass("uv-extremely-high")
             }
         });
+
+        var forcastQueryUrl =
+        "https://api.openweathermap.org/data/2.5/onecall?units=imperial&lat=" +
+        latitude +
+        "&lon=" +
+        longitude + 
+        "&exclude=current,minutely,hourly&appid=" +
+        apiKey; 
+
+        $.ajax({
+            url: forcastQueryUrl,
+            method: "GET",
+        }).then (function(response){
+            $("#forecast-header").text("5-day Forecast")
+            
+            for (let i=1; i<numberOfDaysToForcast +1; i++){
+                var forcastCard = $("<div class= 'card forecast card-body col-sm-2'>")
+                
+                var forcastDayEl = $("<h5>")
+                var unixSeconds = response.daily[i].dt;
+                var unixMilliseconds = unixSeconds * 1000;
+                var forcastDateUnix = new Date(unixMilliseconds);
+                var forcastDayOfWeek = forcastDateUnix.toLocaleString("en-US", {
+                    weekday: "long",
+                });
+                forcastDayEl.text(forcastDayOfWeek);
+
+                var hrLine = $("<hr />");
+
+                var iconPara = $("<p>");
+                var iconImg = $("<img>"); 
+                iconImg.attr(
+                    "src",
+                    "http://openweathermap.org/img/wn/" + 
+                    response.daily[i].weather[0].icon + 
+                    ".png" 
+                ); 
+                iconPara.append(iconImg) 
+
+                var tempInfo = $("<p>").text(
+                    "Temp: " + Math.round(response.daily[i].temp.day) + "°F"
+                );
+
+                var humidityInfo =  $("<p>").text(
+                    "Humidity: " + response.daily[i].humidity + "%"
+                );
+
+
+
+                
+                forcastCard.append(
+                    forcastDayEl,
+                    hrLine,
+                    iconPara,
+                    tempInfo,
+                    humidityInfo
+                );
+
+                $("#forecast-row").append(forcastCard)
+
+            }
+        })
+
 
 
 
