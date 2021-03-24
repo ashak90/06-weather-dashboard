@@ -70,6 +70,45 @@ function showWeather(){
             currentHumidityEl, 
             currentWindEl
         );
+
+        var latitude = response.coord.lat;
+        var longitude = response.coord.lon; 
+        
+        var currentUVQueryUrl=
+        "https://api.openweathermap.org/data/2.5/uvi?appid=" +
+        apiKey +
+        "&lat=" +
+        latitude +
+        "&lon=" +
+        longitude;
+
+        $.ajax({
+            url: currentUVQueryUrl,
+            method: "GET"
+        }).then(function(response){
+            
+            currentUVLabel = $("<span>").text("UV Index: ");
+            currentUVBadge = $("<span>").text(response.value);
+            $("#current-weather-info").append(currentUVLabel, currentUVBadge);
+            console.log(response.value)
+            if (response.value < 3) {
+                // green
+                currentUVBadge.addClass("uv-low");
+            } else if(response.value>=3 && response.value<6) {
+                //yellow 
+                currentUVBadge.addClass("uv-med");
+            } else if (response.value>=6 && response.value<8) {
+                //orange
+                currentUVBadge.addClass("uv-high")
+            } else if (response.value>=8 && response.value<10){
+                currentUVBadge.addClass("uv-very-high")
+            } else {
+                currentUVBadge.addClass("uv-extremely-high")
+            }
+        });
+
+
+
     })
 }
 
