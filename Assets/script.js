@@ -28,10 +28,10 @@ function showWeather(){
         cityName = listCity; 
     }
 
-    $("header-row").empty();
-    $("current-weather-info").empty();
-    $("forecast-header").empty();
-    $("forecast-row").empty();
+    $("#header-row").empty();
+    $("#current-weather-info").empty();
+    $("#forecast-header").empty();
+    $("#forecast-row").empty();
 
     var currentWeatherQueryUrl = 
     "https://api.openweathermap.org/data/2.5/weather?q=" +
@@ -53,16 +53,22 @@ function showWeather(){
         } else {
             alert("Please enter a valid city nane");
         }
-        cityNameAndDate = $("<h4>").text(response.name + "(" + todaysDate + ")");
+        cityNameAndDate = $("<h4>").text(response.name + ' ' + "(" + todaysDate + ")");
         $("#header-row").append(cityNameAndDate);
         currentTempEl = $("<p>").text(
             "Temperature: " + Math.round(response.main.temp) + "°F"
         );
+        currentHumidityEl = $("<p>").text(
+            "Humidity: " + response.main.humidity + "%"
+        );
+        currentWindEl = $("<p>").text(
+            "Wind Speed: " + Math.round(response.wind.speed) + "MPH"
+        );
 
-        console.log(currentTempEl)
-
-        $("current-weather-info").append(
-            currentTempEl
+        $("#current-weather-info").append(
+            currentTempEl,
+            currentHumidityEl, 
+            currentWindEl
         );
     })
 }
