@@ -3,10 +3,6 @@ nav span {
     text-align: center !important;
 }
 
-#search-sidebar {
-    border: black solid 5px;
-}
-
 .uv-low {
     background-color: green;
 }
@@ -44,7 +40,4 @@ nav span {
     background-color: lightgray;
     width: auto;
     border-radius: 90px;
-    /* position: absolute;
-    top: 70px;
-    right: 5vw; */
 }

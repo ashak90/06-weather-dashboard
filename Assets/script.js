@@ -1,8 +1,5 @@
 $(function () {
-
-    var city = "";
     var searchCity = $("#city-input")
-    var searchBtn = $("#search-btn")
     var inputSwitch;
     const apiKey = "5a2c99614ab6e6f319b1c6d71933e13f";
     var searchHistoryArray = [];
@@ -12,7 +9,6 @@ $(function () {
     $("#search-btn").on("click", function () {
         event.preventDefault();
 
-
         if (searchCity.val() === "") {
             console.log("Search button pressed, but no city inputed")
             alert("Please enter a city name")
@@ -20,6 +16,7 @@ $(function () {
             inputSwitch = true;
             showWeather();
         }
+        
     })
 
     $(document).on("click",".list-group-item", function () {
