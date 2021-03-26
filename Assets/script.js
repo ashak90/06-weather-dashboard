@@ -65,7 +65,13 @@ $(function () {
                 alert("Please enter a valid city nane");
             }
             cityNameAndDate = $("<h4>").text(response.name + ' ' + "(" + todaysDate + ")");
-            $("#header-row").append(cityNameAndDate);
+            currentCondIcon = $("<img id='current-conditions-icon'>").attr(
+                "src",
+                "https://openweathermap.org/img/wn/" + response.weather[0].icon + ".png"
+            )
+            $("#header-row").append(cityNameAndDate, currentCondIcon);
+            
+            
             currentTempEl = $("<p>").text(
                 "Temperature: " + Math.round(response.main.temp) + "°F"
             );
@@ -75,6 +81,7 @@ $(function () {
             currentWindEl = $("<p>").text(
                 "Wind Speed: " + Math.round(response.wind.speed) + "MPH"
             );
+           
 
             $("#current-weather-info").append(
                 currentTempEl,
