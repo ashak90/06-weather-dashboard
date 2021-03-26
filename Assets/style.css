@@ -35,6 +35,9 @@ nav span {
 .forecast {
     background-color: #3698dd;
     border-radius: 5px;
+    border: black solid 3px;
     margin: 5px;
+    box-shadow: -1px 1px 7px 1px rgba(20, 69, 102, 1);
+
     
 }

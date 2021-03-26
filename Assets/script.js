@@ -19,6 +19,8 @@ $("#search-btn").on("click", function () {
     }
 })
 
+
+
 function showWeather(){
     event.preventDefault();
 
@@ -178,6 +180,8 @@ function showWeather(){
 function populateSearchField(){
     $("#search-history").empty();
     searchHistoryArray.push(cityName);
+    console.log("searchHistoryArray: " + searchHistoryArray);
+    localStorage.setItem("Weather search history", searchHistoryArray);
 
     for (let i=0; i<searchHistoryArray.length; i++){
         var searchTerm = $("<li>").text(searchHistoryArray[i]);
