@@ -146,7 +146,29 @@ $(function () {
                     var forcastDayOfWeek = forcastDateUnix.toLocaleString("en-US", {
                         weekday: "long",
                     });
+
                     forcastDayEl.text(forcastDayOfWeek);
+
+                    var forcastIndex = i*8 +4; 
+                    var forcastDate = new Date(response.daily[i].dt*1000);
+                    var forcastDay = forcastDate.getDate();
+                    var forcastMonth = forcastDate.getMonth() + 1 ;
+                    var forcastYear = forcastDate.getFullYear();
+                    // var forcastDateEl = document.createElement("h5")
+                    var forcastDateEl = forcastMonth + "/" + forcastDay + "/" + forcastYear;
+                    console.log(forcastDateEl)
+
+                    // forcastDayEl.append(forcastDateEl)
+
+
+
+
+
+
+
+
+
+
 
                     var hrLine = $("<hr />");
 
@@ -170,6 +192,7 @@ $(function () {
 
                     forcastCard.append(
                         forcastDayEl,
+                        forcastDateEl,
                         hrLine,
                         iconPara,
                         tempInfo,
